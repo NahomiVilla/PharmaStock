@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copiar archivos del proyecto y restaurar dependencias
 COPY *.sln .
-COPY PharmaStock/*.csproj ./PharmaStock/
+COPY *.csproj ./PharmaStock/
 RUN dotnet restore
 
 # Copiar el resto del código fuente y compilar
