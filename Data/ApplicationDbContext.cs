@@ -22,7 +22,7 @@ namespace PharmaStock.Data
             modelBuilder.Entity<Producto>().Property(p => p.CantidadMinima).HasDefaultValue(10);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=PharmaStockDB;Username=postgres;Password=S251094v");
+            optionsBuilder.UseNpgsql("Host=dpg-cvarb8qn91rc739a0lm0-a;Port=5432;Database=pharmastock;Username=pharmastock_user;Password=3v6OCkb7dowRnOGsKc7pQ8vgp2IsrSdq");
         }
     }
 }
