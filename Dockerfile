@@ -12,7 +12,7 @@ COPY . ./
 RUN dotnet publish -c Release -o /publish
 
 # Etapa 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /publish .
 ENTRYPOINT ["dotnet", "PharmaStock.dll"]
