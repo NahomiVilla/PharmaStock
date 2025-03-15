@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=build /publish .
 
 # Configurar el puerto de ejecución
-EXPOSE 5274
+EXPOSE 8080
 
 # Comando para ejecutar la app
 ENTRYPOINT ["dotnet", "PharmaStock.dll"]
