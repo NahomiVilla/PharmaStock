@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copiar archivos del proyecto y restaurar dependencias
-COPY *.sln .
-COPY *.csproj ./PharmaStock/
+#COPY *.sln .
+COPY *.csproj ./
 RUN dotnet restore
 
 # Copiar el resto del código fuente y compilar
