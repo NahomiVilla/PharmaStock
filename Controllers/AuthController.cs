@@ -42,7 +42,7 @@ namespace PharmaStock.Controllers
             var user = _userRepository.GetByEmail(model.Email);
 
             if (user != null)
-                return NotFound(new { message = "Usuário já cadastrado" });
+                return NotFound(new { message = "Usuário ya registrado" });
 
             model.Password = PasswordService.HashPassword(model.Password);
             var nuevoUsuario = _userRepository.Registrar(model);

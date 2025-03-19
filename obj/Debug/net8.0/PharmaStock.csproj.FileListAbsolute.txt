@@ -146,3 +146,4 @@ C:\Users\nahom\OneDrive\Documentos\C#\Sistema_de_Gestion\PharmaStock\bin\Debug\n
 C:\Users\nahom\OneDrive\Documentos\C#\Sistema_de_Gestion\PharmaStock\bin\Debug\net8.0\CsvHelper.dll
 C:\Users\nahom\OneDrive\Documentos\C#\Sistema_de_Gestion\PharmaStock\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\nahom\OneDrive\Documentos\C#\Sistema_de_Gestion\PharmaStock\bin\Debug\net8.0\Python.Runtime.dll
+C:\Users\nahom\OneDrive\Documentos\C#\Sistema_de_Gestion\PharmaStock\obj\Debug\net8.0\PharmaStock.sourcelink.json
