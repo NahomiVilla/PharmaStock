@@ -25,8 +25,10 @@ namespace PharmaStock.Repositories{
             _context.SaveChanges();
             return producto;
         }
-        public Producto Update(Producto producto){
-            var Producto = _context.Productos.FirstOrDefault(p => p.Id == producto.Id);
+        public Producto Update(long id,Producto producto){
+            
+            var Producto = _context.Productos.FirstOrDefault(p => p.Id == id);
+            
             if(Producto != null){
                 Producto.Nombre = producto.Nombre;
                 Producto.Descripcion = producto.Descripcion;
