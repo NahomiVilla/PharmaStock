@@ -44,9 +44,21 @@ namespace PharmaStock.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public Producto Update([FromBody]Producto producto)
+        public ActionResult Update(long id,[FromBody]Producto producto)
         {
-            return _repository.Update(producto);
+            if (producto == null || id != producto.Id)
+            {
+                return BadRequest("ID del producto no coincide.");
+            }
+
+            var updatedProducto = _repository.Update(producto);
+            
+            if (updatedProducto == null)
+            {
+                return NotFound("Producto no encontrado.");
+            }
+
+            return Ok(updatedProducto);
         }
 
         [HttpDelete("{id}")]
