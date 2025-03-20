@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using PharmaStock.Models;
 using PharmaStock.Repositories;
 using PharmaStock.Services;
+using PharmaStockAI.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -16,11 +17,28 @@ namespace PharmaStock.Controllers
         private readonly ProductRepository _productRepository;
         private readonly ILogger<ProveedorController> _logger;
         private readonly EmailService _emailService;
-        public ProveedorController(ProductRepository productRepository, ILogger<ProveedorController> logger,EmailService emailService)
+        private readonly ProveedoresRepository _proveedoresRepository;
+        public ProveedorController(ProductRepository productRepository, ILogger<ProveedorController> logger,EmailService emailService,ProveedoresRepository proveedoresRepository)
         {
             _productRepository = productRepository;
-            _emailService=emailService;
             _logger = logger;
+            _emailService=emailService;
+            _proveedoresRepository=proveedoresRepository;
+
+        }
+        
+        [HttpPost]
+        [Route("register")]
+        public IActionResult Register([FromBody] Proveedores model)
+        {
+            var prov = _proveedoresRepository.GetByEmail(model.Email);
+
+            if (prov != null)
+                return NotFound(new { message = "Proveedor ya registrado" });
+
+            
+            var newProv = _proveedoresRepository.Registrar(model);
+            return Ok(newProv);
         }
 
         [HttpPost("reponer")]

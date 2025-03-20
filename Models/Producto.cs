@@ -27,6 +27,6 @@ namespace PharmaStock.Models
         [ForeignKey("Proveedores")]
         public required long? ProveedorId { get; set; }
         public  Proveedores? Proveedor { get; set; }
-        public DateTime CreateAt { get; set; }=DateTime.UtcNow;//DATETIME.utcnow GUARDA LA FECHA DE CREACION AUTOMATICAMENTE
+        public DateTime CreatedAt { get; set; }=DateTime.UtcNow;//DATETIME.utcnow GUARDA LA FECHA DE CREACION AUTOMATICAMENTE
     }
 }
