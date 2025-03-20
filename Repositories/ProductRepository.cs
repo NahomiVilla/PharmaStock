@@ -20,6 +20,7 @@ namespace PharmaStock.Repositories{
             {
                 producto.CantidadMinima = 0;
             }
+            producto.FechaVencimiento = DateTime.SpecifyKind(producto.FechaVencimiento, DateTimeKind.Utc);
             _context.Productos.Add(producto);
             _context.SaveChanges();
             return producto;
