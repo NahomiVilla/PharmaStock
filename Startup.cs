@@ -29,6 +29,7 @@ namespace PharmaStock
             services.AddScoped<UserRepository>();
             services.AddHostedService<AlertService>();
             services.AddHttpClient<PredictionService>();
+            services.AddScoped<ProveedoresRepository>();
             services.AddScoped<ProveedorService>();
             services.AddScoped<EmailService>();
 
