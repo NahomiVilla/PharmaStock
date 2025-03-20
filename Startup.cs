@@ -29,6 +29,8 @@ namespace PharmaStock
             services.AddScoped<UserRepository>();
             services.AddHostedService<AlertService>();
             services.AddHttpClient<PredictionService>();
+            services.AddScoped<ProveedorService>();
+
 
             // Configuración de JWT
             var secretKey = Configuration["Jwt:Key"];
