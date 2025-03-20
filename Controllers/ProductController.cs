@@ -36,10 +36,11 @@ namespace PharmaStock.Controllers
         [HttpPost("registro")]
         [Authorize(Roles ="ADMIN")]
         public ActionResult<Producto> Agregar([FromBody]Producto producto)
-        {
+        {   
+            producto.FechaVencimiento=producto.FechaVencimiento.Date;
             var nuevoProducto=_repository.Agregar(producto);
             return CreatedAtAction(nameof(GetById), new {id=nuevoProducto.Id}, nuevoProducto);
-            //return _repository.Agregar(producto);
+            
         }
 
         [HttpPut("update/{id}")]
