@@ -29,17 +29,21 @@ namespace PharmaStock.Repositories{
             
             var productoExistente = _context.Productos.FirstOrDefault(p => p.Id == id);
             
-            if(productoExistente != null){
-                productoExistente.Nombre = producto.Nombre;
-                productoExistente.Descripcion = producto.Descripcion;
-                productoExistente.Categoria = producto.Categoria;
-                productoExistente.CantidadActual = producto.CantidadActual;
-                productoExistente.CantidadMinima = producto.CantidadMinima;
-                productoExistente.Precio = producto.Precio;
-                productoExistente.FechaVencimiento = producto.FechaVencimiento;
+             if (productoExistente == null)
+            {
+                return null; // Producto no encontrado
             }
+            productoExistente.Nombre = producto.Nombre;
+            productoExistente.Descripcion = producto.Descripcion;
+            productoExistente.Categoria = producto.Categoria;
+            productoExistente.CantidadActual = producto.CantidadActual;
+            productoExistente.CantidadMinima = producto.CantidadMinima;
+            productoExistente.Precio = producto.Precio;
+            productoExistente.FechaVencimiento = producto.FechaVencimiento;
+        
+            
             _context.SaveChanges();
-            return producto;
+            return productoExistente;
         }
         public async Task<Producto> UpdateAsync(Producto producto){
             var Producto = await _context.Productos.FirstOrDefaultAsync(p => p.Id == producto.Id);
