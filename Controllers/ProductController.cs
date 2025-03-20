@@ -12,12 +12,12 @@ namespace PharmaStock.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ProductRepository _repository;
-        private readonly AlertService _alertService;
+        //private readonly AlertService _alertService;
 
-        public ProductController(ProductRepository repository, AlertService alertService)
+        public ProductController(ProductRepository repository)
         {
             _repository = repository;
-            _alertService = alertService;
+            //_alertService = alertService;
         }
        
 
