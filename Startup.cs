@@ -30,6 +30,7 @@ namespace PharmaStock
             services.AddHostedService<AlertService>();
             services.AddHttpClient<PredictionService>();
             services.AddScoped<ProveedorService>();
+            services.AddScoped<EmailService>();
 
 
             // Configuración de JWT
