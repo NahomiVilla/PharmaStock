@@ -14,5 +14,8 @@ RUN dotnet publish -c Release -o /publish
 # Etapa 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
+# Instalar Python en la etapa de runtime
+RUN apt-get update && apt-get install -y python3 python3-pip
+
 COPY --from=build /publish .
 ENTRYPOINT ["dotnet", "PharmaStock.dll"]

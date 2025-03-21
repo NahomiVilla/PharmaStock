@@ -31,8 +31,10 @@ namespace PharmaStock.Services{
             try
             {
                 // Ruta al script de predicción en Python
-                string pythonScript = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts", "PythonScripts/Demand_Prediction.py");
-                string pythonExe = "python"; // O usa la ruta completa si es necesario
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string pythonScript = Path.Combine(basePath, "Scripts", "PythonScripts/Demand_Prediction.py");
+                Console.WriteLine($"Ejecutando script Python: {pythonScript}");
+                string pythonExe = "python3"; // O usa la ruta completa si es necesario
 
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
