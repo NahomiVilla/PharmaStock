@@ -28,7 +28,7 @@ public class ProveedorService
         var content = new StringContent(jsonOrden, Encoding.UTF8, "application/json");
 
         // Suponiendo que el proveedor tiene una API en esta URL
-        HttpResponseMessage response = await _httpClient.PostAsync("https://localhost:5274/api/proveedor/reponer", content);
+        HttpResponseMessage response = await _httpClient.PostAsync("https://pharmastock-back.onrender.com/api/proveedor/reponer", content);
 
         if (response.IsSuccessStatusCode)
         {

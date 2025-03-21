@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.SignalR;
 using PharmaStock.Hubs;
@@ -6,22 +7,66 @@ using PharmaStock.Models;
 using Python.Runtime;
 
 namespace PharmaStock.Services{
-    class PredictionService{
+    public class PredictionService{
         private readonly IHubContext<PredictionHub> _hubContext;
-        private readonly HttpClient _httpClient;
+        
 
-        public PredictionService(IHubContext<PredictionHub> hubContext, HttpClient httpClient){
+        public PredictionService(IHubContext<PredictionHub> hubContext){
             _hubContext = hubContext;
-            _httpClient = httpClient;
+           
         }
 
-        public async Task FetchAndBroadcastPrediction(){
-            HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:5000/predicciones");
-            if(response.IsSuccessStatusCode){
-                string json = await response.Content.ReadAsStringAsync();
-                await _hubContext.Clients.All.SendAsync("ReceivePrediction", json);
+        public async Task FetchAndBroadcastPrediction()
+        {
+            string result = RunPythonScript();
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                await _hubContext.Clients.All.SendAsync("ReceivePrediction", result);
             }
         }
+
+        private string RunPythonScript()
+        {
+            try
+            {
+                // Ruta al script de predicción en Python
+                string pythonScript = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts", "PythonScripts/Demand_Prediction.py");
+                string pythonExe = "python"; // O usa la ruta completa si es necesario
+
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = pythonExe,
+                    Arguments = $"\"{pythonScript}\"",  // Ejecuta el script
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = new Process { StartInfo = psi })
+                {
+                    process.Start();
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        Console.WriteLine($"Error en script Python: {error}");
+                        return string.Empty;
+                    }
+
+                    return output;  // Devuelve la predicción en formato JSON
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error ejecutando Python: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
     }
 
     
