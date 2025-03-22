@@ -32,7 +32,7 @@ namespace PharmaStock.Services{
             {
                 // Ruta al script de predicción en Python
                 string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                string pythonScript = Path.Combine(basePath, "Scripts", "PythonScripts/Demand_Prediction.py");
+                string pythonScript = Path.Combine(basePath, "PythonScripts/Demand_Prediction.py");
                 Console.WriteLine($"Ejecutando script Python: {pythonScript}");
                 string pythonExe = "python3"; // O usa la ruta completa si es necesario
 
