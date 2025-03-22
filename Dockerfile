@@ -15,7 +15,8 @@ RUN dotnet publish -c Release -o /publish
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 # Instalar Python en la etapa de runtime
-RUN apt-get update && apt-get install -y python3 python3-pip
+RUN apt-get update && apt-get install -y python3 python3-pip \ 
+    && pip3 install -r PythonScripts\requirements.txt
 
 COPY --from=build /publish .
 
